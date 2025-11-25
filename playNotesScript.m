@@ -20,7 +20,7 @@ function playNotes(noteArray, durationArray)
         t = 0:1/fs:duration;
 
         if freq == 0
-            % Thinking itll be hopefully easy to change the waveform, for now, i just have rests, and regular sin guy
+            % Thinking itll be hopefully easy to change the waveform, for now, i just have rests, and regular sin() guy
             % Rest: silence (all zeros)
             waveform = zeros(size(t));
         else

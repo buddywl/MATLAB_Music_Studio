@@ -51,11 +51,11 @@ function freq = noteToFrequency(noteStr)
 end
 
 
-
-
 t = 0:1/44100:0.5; %half note 44100 sampling rate standard for audio
 sound(sin(2*pi*noteToFrequency("A4")*t), 44100);
 sound(sin(2*pi*noteToFrequency("A5")*t), 44100);
+sound(sin(2*pi*noteToFrequency("A3")*t), 44100);
+sound(sin(2*pi*noteToFrequency("A6")*t), 44100);
 
 
 % SOURCES: 
