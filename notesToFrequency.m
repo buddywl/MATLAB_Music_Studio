@@ -15,12 +15,12 @@ function freq = noteToFrequency(noteStr)
         freq = 440 * 2^((midi - 69) / 12);
     end
 
-
-t = 0:1/44100:0.5; %half note 44100 sampling rate standard for audio
-sound(sin(2*pi*noteToFrequency("A4")*t), 44100);
-sound(sin(2*pi*noteToFrequency("A5")*t), 44100);
-sound(sin(2*pi*noteToFrequency("A3")*t), 44100);
-sound(sin(2*pi*noteToFrequency("A6")*t), 44100);
+fs = 44100;        % 44100 sampling rate standard for audio
+t  = 0:1/fs:0.5;   % half-second note
+sound(sin(2*pi*noteToFrequency("A4")*t), fs);
+% sound(sin(2*pi*noteToFrequency("A5")*t), fs);
+% sound(sin(2*pi*noteToFrequency("A3")*t), fs);
+% sound(sin(2*pi*noteToFrequency("A6")*t), fs);
 
 % SOURCES: 
 %   - https://www.phys.unsw.edu.au/jw/notes.html
