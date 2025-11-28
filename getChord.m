@@ -16,21 +16,21 @@ function [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSevent
     %   noteNames  : cell array of note strings, e.g. {'A3','C#4','E4','G4'}
     %   freqs      : number array of frequencies in Hz
     
-        % ---- Defaults for missing args ----
-        if nargin < 2 || isempty(accidental)
+        % ---- defualts/missing args ----
+        if isempty(accidental)
             accidental = '';
         end
-        if nargin < 3 || isempty(quality)
+        if isempty(quality)
             quality = 'major';
         end
-        if nargin < 4 || isempty(isSeventh)
+        if isempty(isSeventh)
             isSeventh = false;
         end
-        if nargin < 5 || isempty(octave)
+        if isempty(octave)
             octave = 4;
         end
     
-        % ---- make inputs normalized ----
+        % ---- normalize inputs ----
         rootLetter = upper(string(rootLetter));        
         accidental = string(accidental);               
         qualityStr = lower(strtrim(string(quality)));  
@@ -45,20 +45,20 @@ function [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSevent
             case {"min7","m7","minor7"}
                 intervals = [0 3 7 10];          % minor 7: R, m3, P5, m7
     
-            % Major family: triad or 7th
+            % major family: triad or 7th
             case {"major","maj"}
                 if isSeventh
                     intervals = [0 4 7 10];
                 else
-                    intervals = [0 4 7];         % major triad
+                    intervals = [0 4 7];         
                 end
     
-            % Minor family: triad or 7th 
+            % minor family: triad or 7th 
             case {"minor","min","m"}
                 if isSeventh
                     intervals = [0 3 7 10];      
                 else
-                    intervals = [0 3 7];         % minor triad
+                    intervals = [0 3 7];         
                 end
             otherwise
                 error('Unsupported chord quality: "%s"', qualityStr);
@@ -69,7 +69,8 @@ function [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSevent
     
         % ---- call noteTomidi ----
         rootMidi    = noteTomidi(rootNote);
-        midiNumbers = rootMidi + intervals;     % shift by semitone intervals
+        % Take the root note, and add these semitone intervals to get the other chord notes.
+        midiNumbers = rootMidi + intervals;
     
         % ---- MIDI to frequency ----
         freqs = 440 * 2.^((midiNumbers - 69) / 12);
@@ -92,4 +93,11 @@ function [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSevent
     end
 
 
-    
+%% Notes for myself:
+% In MIDI space: +1 = “next semitone” 
+% In frequency space: +1 semitone = × 2^(1/12)
+% So it’s much cleaner to do:
+    % 1. rootNote → rootMidi
+    % 2. rootMidi + intervals → midiNumbers
+    % 3. midiNumbers → frequencies with 440 * 2^((midi - 69)/12)
+% sources in readme

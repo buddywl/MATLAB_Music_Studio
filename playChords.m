@@ -7,10 +7,10 @@ function playChord(rootLetter, accidental, quality, isSeventh, octave, duration)
         fs = 44100;
         t  = 0:1/fs:duration;
     
-        % Get chord note names + freqs
+        % get chord note names + freqs
         [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSeventh, octave);
     
-        % Sum sine waves for each chord tone
+        % sum sine waves for each chord
         waveform = zeros(size(t));
         for k = 1:numel(freqs)
             if freqs(k) > 0
@@ -18,7 +18,8 @@ function playChord(rootLetter, accidental, quality, isSeventh, octave, duration)
             end
         end
     
-        % avoid clipping, it was super distorted otherwise
+        % avoid clipping, it was super distorted otherwise 
+        ... i wonder if theres another way around it
         maxAmp = max(abs(waveform));
         if maxAmp > 0
             waveform = waveform / maxAmp;
@@ -32,8 +33,10 @@ function playChord(rootLetter, accidental, quality, isSeventh, octave, duration)
         sound(waveform, fs);
         pause(duration)
     end
-    
-playChord('A', '',  'major', false, 3, 1.0);  % A3 major
+
+playChord('A', '',  'major', false, 3, 0.5);  % A3 major
 playChord('A', '',  'major', true,  3, 1.0);  % A7
-playChord('A', '',  'minor', true,  3, 1.0);  % Am7
+playChord('A', '',  'minor', true,  3, 1.5);  % Am7
 playChord('B', 'b', 'minor', false, 3, 1.0);  % Bb minor
+playChord('C', '#', 'major', false, 4, 1.0);  % C#4 major
+playChord('D', '',  'major', true,  4, 1.0);  % D7

@@ -15,7 +15,7 @@ function playNotes(noteArray, durationArray)
             noteStr = noteArray{i};
             duration = durationArray(i);
     
-            freq = notesToFrequency(noteStr);
+            freq = noteToFrequency(noteStr);
     
             t = 0:1/fs:duration;
     
@@ -32,5 +32,4 @@ function playNotes(noteArray, durationArray)
         end
     end
     
-    
-    playNotes({'C4','E4','G4','C5'}, [0.5 0.5 0.5 1]);
+playNotes({'C4','E4','G4','C5'}, [0.5 0.5 0.5 1])
