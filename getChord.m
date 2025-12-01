@@ -39,14 +39,14 @@ function [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSevent
             case {"7","dom7","dominant7"}
                 intervals = [0 4 7 10];          % dominant 7: R, M3, P5, m7
     
-            case {"maj7","major7", "M7"}
+            case {"maj7","major7"}
                 intervals = [0 4 7 11];          % major 7: R, M3, P5, M7
     
             case {"min7","m7","minor7"}
                 intervals = [0 3 7 10];          % minor 7: R, m3, P5, m7
     
             % major family: triad or 7th
-            case {"major","maj", "M"}
+            case {"major","maj"}
                 if isSeventh
                     intervals = [0 4 7 10];
                 else
