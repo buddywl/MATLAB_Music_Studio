@@ -62,44 +62,10 @@ function playNote(noteArray, durationArray, instrument)
 
         t = 0:1/fs:duration;
 
-        % ------------------------------
-        % REST (freq = 0)
-        % ------------------------------
         if freq == 0
             tone = zeros(size(t));
-
-        % ------------------------------
-        % TONE GENERATION
-        % ------------------------------
         else
             tone = waveform(instrument, freq, duration, fs, t);
-            % switch lower(instrument)
-
-            %     case 'sine'
-            %         y = sin(2*pi*freq*t);
-
-            %     case 'square'
-            %         y = square(2*pi*freq*t);
-
-            %     case 'saw'
-            %         y = sawtooth(2*pi*freq*t);
-
-            %     case 'triangle'
-            %         y = sawtooth(2*pi*freq*t, 0.5);
-
-            %     case 'piano'
-            %         % Additive synthesis "fake piano"
-            %         % Harmonic decay envelope
-            %         env = exp(-3*t);
-            %         y = ( ...
-            %             1.0*sin(2*pi*freq*t) + ...
-            %             0.5*sin(2*pi*2*freq*t) + ...
-            %             0.2*sin(2*pi*3*freq*t) ...
-            %             ) .* env;
-
-            %     otherwise
-            %         error("Unknown waveformType: " + instrument);
-            % end
         end
 
         % Normalize to protect speakers
