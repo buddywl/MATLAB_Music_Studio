@@ -23,13 +23,15 @@ function tone = waveforms(instrument, freq, duration, fs, t)
         case 'guitar'
             N = round(fs / freq);
             buffer = 2*rand(1,N)-1;
-            y = zeros(1, round(duration*fs));
+            y = zeros(size(t));
             for n = 1:length(y)
                 buffer(1) = 0.998 * 0.5 * (buffer(1) + buffer(2)); % average + decay
                 y(n) = buffer(1);
                 buffer = [buffer(2:end), buffer(1)];
             end
             tone = y;
+
+            
 
             % https://www.mathworks.com/help/signal/ug/generate-guitar-chords-using-the-karplus-strong-algorithm.html
 
