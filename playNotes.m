@@ -77,4 +77,4 @@ function playNote(noteArray, durationArray, instrument)
     end
 end
 playNote({'E4','D4','C4','D4','E4','E4','E4'}, ...
-         [0.4 0.4 0.4 0.4 0.4 0.4 0.8], 'organ');
+         [0.4 0.4 0.4 0.4 0.4 0.4 0.8], 'guitar');
