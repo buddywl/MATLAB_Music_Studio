@@ -1,4 +1,4 @@
-function tone = waveforms(instrument, freq, duration, fs, t)
+function tone = waveform(instrument, freq, duration, fs, t)
     switch instrument
         case 'sine'
             tone = sin(2*pi*freq*t);
