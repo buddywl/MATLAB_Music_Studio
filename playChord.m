@@ -35,10 +35,3 @@ function playChord(rootLetter, accidental, quality, isSeventh, octave, duration,
         pause(duration)
     end
 
-playChord('A', '',  'major', false, 3, 0.5, 'piano');  % A3 major
-playChord('A', '',  'major', true,  3, 1.0, 'triangle');  % A7
-playChord('A', '',  'minor', true,  3, 1.5, 'square');  % Am7
-playChord('B', 'b', 'minor', false, 3, 1.0, 'saw');  % Bb minor
-playChord('C', '#', 'major', false, 4, 1.0, 'guitar');  % C#4 major ~~~guitar doesns't work for chords, gonna try and figure that out
-                                                                    ...used the Karplus Strong Algorithm, documentation linked in the file `waveform.m`
-playChord('D', '',  'major', true,  4, 1.0, 'sin');  % D7

@@ -19,3 +19,12 @@ sound(sin(2*pi*noteToFrequency("A4")*t), 44100);
 sound(sin(2*pi*noteToFrequency("A5")*t), 44100);
 sound(sin(2*pi*noteToFrequency("A3")*t), 44100);
 sound(sin(2*pi*noteToFrequency("A6")*t), 44100);
+
+## sane thing here
+
+playChord('A', '',  'major', false, 3, 0.5, 'piano');  % A3 major
+playChord('A', '',  'major', true,  3, 1.0, 'triangle');  % A7
+playChord('A', '',  'minor', true,  3, 1.5, 'square');  % Am7
+playChord('B', 'b', 'minor', false, 3, 1.0, 'saw');  % Bb minor
+playChord('C', '#', 'major', false, 4, 1.0, 'guitar');  % C#4 major
+playChord('D', '',  'major', true,  4, 1.0, 'sin');  % D7
