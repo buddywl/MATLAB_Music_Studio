@@ -8,6 +8,7 @@ SOURCES:
   - https://en.wikipedia.org/wiki/Dominant_seventh_chord
   - https://en.wikipedia.org/wiki/MIDI_tuning_standard
   - https://www.reddit.com/r/musictheory/comments/1hfoim3/1_3_5_or_0_4_7/
+  - https://www.mathworks.com/help/signal/ug/generate-guitar-chords-using-the-karplus-strong-algorithm.html
 
 
     
