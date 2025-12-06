@@ -68,3 +68,47 @@ for i = 1:numel(chords)
     hold off;
 
 end
+
+%% ------------------------------------------------------------
+% Comparing instruments for one chord
+% Bb dominant 7 (Bb7)
+
+
+label      = 'Bb7';
+[noteNames, freqs] = getChord('B', 'b', 'dom7', true, 4);
+instruments = {'organ', 'guitar'};
+
+for j = 1:numel(instruments)
+    instr = instruments{j};
+    % Build chord signal using waveform
+    tone = zeros(size(t));
+    for k = 1:numel(freqs)
+        tone = tone + waveform(instr, freqs(k), duration, fs, t);
+    end
+    tone = tone / (max(abs(tone)) + 1e-12);
+
+    % FFT (simple one-sided magnitude)
+    N = length(tone);
+    X = fft(tone);
+    mag = abs(X(1:floor(N/2)+1));
+    f = (0:floor(N/2)) * (fs/N);
+
+    % Plot
+    figure('Name', [label ' - ' instr]);
+    set(0,'DefaultAxesFontName','Times New Roman');
+    plot(f, mag, 'LineWidth', 1.2);
+    grid on;
+
+    title(sprintf('Frequency Spectrum: %s (%s)', label, instr));
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude');
+    xlim([0 2000]);
+
+    % Mark expected chord-note frequencies
+    hold on;
+    for k = 1:numel(freqs)
+        set(0,'DefaultAxesFontName','Times New Roman');
+        xline(freqs(k), '--', noteNames{k});
+    end
+    hold off;
+end
