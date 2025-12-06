@@ -1,6 +1,6 @@
 # MATLAB_Music_Studio
 
-##SOURCES: 
+## SOURCES: 
   - https://www.phys.unsw.edu.au/jw/notes.html
   - https://majormixing.com/audio-sample-rate-and-bit-depth-complete-guide #:~:text=recording%20audible%20songs.-,What%20is%20the%20normal%20sample%20rate?,of%20the%20sound%20with%20them.
   - https://inspiredacoustics.com/en/MIDI_note_numbers_and_center_frequencies
