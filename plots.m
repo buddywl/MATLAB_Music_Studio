@@ -142,6 +142,6 @@ for j = 1:numel(instruments)
 
     % mark the notes
     hold on;
-    xline(freq, '--', sprintf('Fundamental %.1f Hz', freq));
+    xline(freq, '--', sprintf('Fundamental %.1f Hz', freq),'FontName','Times New Roman');
     hold off;
 end
