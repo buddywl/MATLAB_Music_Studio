@@ -13,7 +13,7 @@ t = t(1:end-1);
 
 instrument = 'sine';   % keep the spectrum clean for presentation
 
-% Chords to plot:
+% chords to plot:
 % {rootLetter, accidental, quality, isSeventh, octave, label}
 chords = { ...
     {'A','', 'maj7',  false, 4, 'Amaj7'}, ...
@@ -32,25 +32,25 @@ for i = 1:numel(chords)
     octave     = c{5};
     label      = c{6};
 
-    % Get chord notes + frequencies from your function
+    % get chord notes + frequencies
     [noteNames, freqs] = getChord(rootLetter, accidental, quality, isSeventh, octave);
 
-    % Build chord signal using your waveform engine
+    % build chord signal using waveform
     tone = zeros(size(t));
     for k = 1:numel(freqs)
         tone = tone + waveform(instrument, freqs(k), duration, fs, t);
     end
 
-    % Normalize
+    % normalize
     tone = tone / (max(abs(tone)) + 1e-12);
 
-    % FFT (simple one-sided magnitude)
+    % FFT (magnitude)
     N = length(tone);
     X = fft(tone);
     mag = abs(X(1:floor(N/2)+1));
     f = (0:floor(N/2)) * (fs/N);
 
-    % Plot
+    % plot
     figure('Name', label);
     set(0,'DefaultAxesFontName','Times New Roman');
     plot(f, mag, 'LineWidth', 1.2);
@@ -60,7 +60,7 @@ for i = 1:numel(chords)
     ylabel('Magnitude');
     xlim([0 800]);
 
-    % Mark expected note frequencies
+    % mark expected note frequencies
     hold on;
     for k = 1:numel(freqs)
         xline(freqs(k), '--', noteNames{k},'FontName','Times New Roman');
@@ -70,30 +70,28 @@ for i = 1:numel(chords)
 end
 
 %% ------------------------------------------------------------
-% Comparing instruments for one chord
+% comparing instruments for one chord
 % Bb dominant 7 (Bb7)
-
-
 label      = 'Bb7';
 [noteNames, freqs] = getChord('B', 'b', 'dom7', true, 4);
 instruments = {'organ', 'guitar'};
 
 for j = 1:numel(instruments)
     instr = instruments{j};
-    % Build chord signal using waveform
+    % build chord signal using waveform
     tone = zeros(size(t));
     for k = 1:numel(freqs)
         tone = tone + waveform(instr, freqs(k), duration, fs, t);
     end
     tone = tone / (max(abs(tone)) + 1e-12);
 
-    % FFT (simple one-sided magnitude)
+    % FFT (magnitude)
     N = length(tone);
     X = fft(tone);
     mag = abs(X(1:floor(N/2)+1));
     f = (0:floor(N/2)) * (fs/N);
 
-    % Plot
+    % plot
     figure('Name', [label ' - ' instr]);
     set(0,'DefaultAxesFontName','Times New Roman');
     plot(f, mag, 'LineWidth', 1.2);
@@ -104,11 +102,46 @@ for j = 1:numel(instruments)
     ylabel('Magnitude');
     xlim([0 2000]);
 
-    % Mark expected chord-note frequencies
+    % mark expected chord-note frequencies
     hold on;
     for k = 1:numel(freqs)
         set(0,'DefaultAxesFontName','Times New Roman');
         xline(freqs(k), '--', noteNames{k});
     end
+    hold off;
+end
+
+%% plot notes 
+
+noteStr = "A#4"; 
+freq    = noteToFrequency(noteStr);
+
+for j = 1:numel(instruments)
+    instr = instruments{j};
+
+    tone = waveform(instr, freq, duration, fs, t);
+
+    % normalize
+    tone = tone / (max(abs(tone)) + 1e-12);
+
+    % FFT (magnitude)
+    X   = fft(tone);
+    mag = abs(X(1:floor(N/2)+1));
+    f   = (0:floor(N/2)) * (fs/N);
+
+    % plot
+    figure('Name', sprintf('%s - %s', noteStr, instr));
+    set(0,'DefaultAxesFontName','Times New Roman');
+    plot(f, mag, 'LineWidth', 1.2);
+    grid on;
+
+    title(sprintf('Frequency Spectrum: %s (%s)', noteStr, instr));
+    xlabel('Frequency (Hz)');
+    ylabel('Magnitude');
+    xlim([0 2000]);
+
+    % mark the notes
+    hold on;
+    xline(freq, '--', sprintf('Fundamental %.1f Hz', freq));
     hold off;
 end
