@@ -28,4 +28,9 @@ chordDur  = [0.5 0.5 0.5 2 ...
              0.5 0.5 0.5 2 ...
              0.5 0.5 0.5 0.5 0.5]; 
 
-playTogether(melodyNotes, melodyDur, chordDefs, chordDur, 'saw', 'organ');
+% playTogether(melodyNotes, melodyDur, chordDefs, chordDur, 'square', 'organ');
+
+playNote({'A4'}, [0.5], 'sine');
+% playNote({'A4'}, [1], 'square');
+% playNote({'A4'}, [1], 'saw');
+% playNote({'A4'}, [1], 'triangle');
